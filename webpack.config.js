@@ -4,8 +4,8 @@ var path = require('path');
 module.exports = {
 	entry: ['es6-promise', 'whatwg-fetch', './static/app.js'],
 	output: {
-		path: './',
-		publicPath: './',
+		path: './public/build/',
+		publicPath: './public/build/',
 		filename: 'bundle.js'
 	},
 	module: {
