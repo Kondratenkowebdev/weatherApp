@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-	entry: ['es6-promise', 'whatwg-fetch', './static/app.js'],
+	entry: ['babel-polyfill', 'es6-promise', 'whatwg-fetch', './static/app.js'],
 	output: {
 		path: './public/build/',
 		publicPath: './public/build/',

@@ -19,21 +19,14 @@ export default class ContactList extends Component {
 	}
 
 	componentDidMount() {
-		if ( typeof(Storage) !== "undefined" ) {
-			if ( localStorage.getItem("citysArr") ) {
-				let citysArr = localStorage.getItem("citysArr").split(',');
-				this.setState(() => ({ 
-					citysNames: citysArr
-				}));
-				for (let i = 0; i < citysArr.length; i++) {
-					this.getData(citysArr[i])
-				};
-			}
-		} else {
-			this.setState(() => ({
-				errorText: 'Sorry! Your browser do not have Web Storage support',
-				showError: true
+		if ( localStorage.getItem("citysArr") ) {
+			let citysArr = localStorage.getItem("citysArr").split(',');
+			this.setState(() => ({ 
+				citysNames: citysArr
 			}));
+			for (let i = 0; i < citysArr.length; i++) {
+				this.getData(citysArr[i])
+			};
 		}
 	}
 
@@ -59,7 +52,7 @@ export default class ContactList extends Component {
 					citysJson: this.state.citysJson.concat([data])
 				}));
 				if ( writeCookie ) {
-					this.writeLocalStorage( data.name.toLowerCase() );
+					this.addToLocalStorage( data.name.toLowerCase() );
 				}
 			})
 			.catch(e => {
@@ -79,19 +72,12 @@ export default class ContactList extends Component {
 	}
 
 	deleteLocalStorage = (city) => {
-		if (typeof(Storage) !== "undefined") {
-			if (localStorage.getItem("citysArr") ) {
-				var citysArr = localStorage.getItem("citysArr").split(',');
-				if (citysArr.indexOf( city.toLowerCase() ) !== -1) {
-					citysArr.splice( citysArr.indexOf( city.toLowerCase() ), 1);
-					localStorage.setItem("citysArr", citysArr.join());
-				}
+		if (localStorage.getItem("citysArr") ) {
+			var citysArr = localStorage.getItem("citysArr").split(',');
+			if (citysArr.indexOf( city.toLowerCase() ) !== -1) {
+				citysArr.splice( citysArr.indexOf( city.toLowerCase() ), 1);
+				localStorage.setItem("citysArr", citysArr.join());
 			}
-		} else {
-			this.setState(() => ({
-				errorText: 'Sorry! Your browser do not have Web Storage support',
-				showError: true
-			}));
 		}
 	}
 
@@ -107,18 +93,14 @@ export default class ContactList extends Component {
 		};
 	}
 
-	writeLocalStorage = (city) => {
-		if (typeof(Storage) !== "undefined") {
-			if ( localStorage.getItem("citysArr") ) {
-				if ( localStorage.getItem("citysArr").indexOf(city) == -1 ) {
-					let citysArr = localStorage.getItem("citysArr");
-					localStorage.setItem("citysArr", citysArr+','+city);
-				}
-			}else {
-				localStorage.setItem("citysArr", city);
+	addToLocalStorage = (city) => {
+		if ( localStorage.getItem("citysArr") ) {
+			if ( localStorage.getItem("citysArr").indexOf(city) == -1 ) {
+				let citysArr = localStorage.getItem("citysArr");
+				localStorage.setItem("citysArr", citysArr+','+city);
 			}
-		} else {
-			console.log('Sorry! No Web Storage support')
+		}else {
+			localStorage.setItem("citysArr", city);
 		}
 	}
 
