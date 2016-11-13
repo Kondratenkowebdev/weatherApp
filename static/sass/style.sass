@@ -1,0 +1,87 @@
+@import 'reset'
+
+// Fonts 
+$mainFont: 'Open Sans Condensed', sans-serif
+
+// Colors
+$placeholderColor: #8E8E8E
+
+*
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+
+body, html
+	width: 100%
+	font-family: $mainFont, sans-serif
+
+h1
+	font-size: 34px
+
+h2
+	font-size: 26px
+	margin: 0.2em 0 0.2em
+
+body
+	background-color: black
+	background: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/mooning.png) repeat 
+	background-attachment: fixed
+	font-size: 16px
+	line-height: 1.41em
+
+.weatherAppWrapper
+	max-width: 1200px
+	margin: 40px auto 0 auto
+	width: 100%
+	height: 100%
+
+input
+	width: 100%
+	border: none
+	outline: none
+	background-color: rgba(255,255,255,0.7)
+	transition: background 0.3s
+	padding: 0px 20px
+	color: black 
+	font-family: $mainFont
+
+	&:focus
+		background-color: rgba(255,255,255,1)
+
+	&::-webkit-input-placeholder
+		color: $placeholderColor
+
+	&::-moz-placeholder
+		color: $placeholderColor
+
+	&:-ms-input-placeholder
+		color: $placeholderColor
+
+	&:-moz-placeholder
+		color: $placeholderColor
+
+.link
+	color: #C7AC00
+	text-decoration: underline
+	cursor: pointer
+
+	&:hover
+		text-decoration: none
+
+.deleteIcon
+	cursor: pointer
+	&:after
+		content: '❌';
+
+.clear:after
+	content: ""
+	display: table
+	clear: both
+
+@media screen and (max-width: 1200px)
+	.weatherAppWrapper
+		width: 80%
+		margin: 20px auto 0 auto
+
+
+

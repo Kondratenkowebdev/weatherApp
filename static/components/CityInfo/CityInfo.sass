@@ -1,0 +1,39 @@
+.cityInfoWrapper
+	margin: 40px 0
+	width: 100%
+
+	.cityInfo
+		float: left
+		width: 31.5%
+		background-color: rgba(255,255,255,0.7)
+		margin-bottom: 2.73% 
+		padding: 15px 20px
+		position: relative
+
+		&:not(:nth-of-type(3n))
+			margin-right: 2.73% 
+
+	.weatherUl
+		li
+			line-height: 2em
+			font-size: 18px
+
+	.deleteIcon
+		position: absolute
+		right: 20px
+		top: 20px
+
+		&:hover
+			color: #8E8E8E
+
+
+@media screen and (max-width: 1200px)
+	.cityInfoWrapper
+		margin: 20px auto
+		.cityInfo
+			width: 100%
+			margin-right: none
+			margin-bottom: 20px
+
+			&:not(:nth-of-type(3n))
+				margin-right: none
