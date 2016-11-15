@@ -31087,7 +31087,15 @@
 			_this.handleSubmit = function (e) {
 				e.preventDefault();
 				if (_this.state.citysNames.indexOf(_this.state.searchValue.toLowerCase()) == -1) {
-					_this.getData(_this.state.searchValue, true);
+					(function () {
+						var citysNamesUpd = _this.state.citysNames.concat([_this.state.searchValue.toLowerCase()]);
+						_this.setState(function () {
+							return {
+								citysNames: citysNamesUpd
+							};
+						});
+						_this.getData(_this.state.searchValue, true);
+					})();
 				} else {
 					_this.setState(function () {
 						return {
@@ -31110,6 +31118,13 @@
 			};
 
 			_this.deleteInfo = function (name) {
+				var citysArr = _this.state.citysNames;
+				var index = citysArr.indexOf(name.toLowerCase());
+				citysArr.splice(index, 1);
+				_this.setState(function () {
+					return { citysNames: citysArr };
+				});
+
 				var _loop = function _loop(i) {
 					var updateArr = _this.state.citysJson;
 					if (_this.state.citysJson[i].name == name) {
@@ -31125,10 +31140,10 @@
 				};
 
 				for (var i = 0; i < _this.state.citysJson.length; i++) {
-					var _ret = _loop(i);
+					var _ret2 = _loop(i);
 
-					if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-				};
+					if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+				}
 			};
 
 			_this.addToLocalStorage = function (city) {
@@ -31152,8 +31167,10 @@
 
 			_this.setValidCity = function (city) {
 				_this.getData(_this.state.validCity, true);
+
 				_this.setState(function () {
 					return {
+						citysNames: _this.state.citysNames.concat([_this.state.validCity.toLowerCase()]),
 						searchValue: '',
 						showError: false,
 						validCity: ''
@@ -31355,7 +31372,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchForm {\n  position: relative; }\n  .searchForm .searchInput {\n    height: 48px;\n    font-size: 20px; }\n\n.errorMessage {\n  position: fixed;\n  padding: 10px;\n  right: 30px;\n  top: 30px;\n  background-color: rgba(255, 0, 0, 0.7);\n  font-size: 20px;\n  opacity: 0;\n  -webkit-transform: translate(120%, 0);\n          transform: translate(120%, 0);\n  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;\n  transition: opacity 0.3s, -webkit-transform 0.3s;\n  transition: opacity 0.3s, transform 0.3s;\n  transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s; }\n  .errorMessage.active {\n    opacity: 1;\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0); }\n\n.errorCity {\n  position: absolute;\n  bottom: -25px;\n  -webkit-transition: opacity 0.3s;\n  transition: opacity 0.3s;\n  opacity: 0; }\n  .errorCity.active {\n    opacity: 1; }\n", ""]);
+	exports.push([module.id, ".searchForm {\n  position: relative; }\n  .searchForm .searchInput {\n    height: 48px;\n    font-size: 20px; }\n\n.errorMessage {\n  position: fixed;\n  padding: 10px;\n  right: 9px;\n  top: 43px;\n  background-color: rgba(255, 0, 0, 0.7);\n  font-size: 20px;\n  opacity: 0;\n  -webkit-transform: translate(120%, 0);\n          transform: translate(120%, 0);\n  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;\n  transition: opacity 0.3s, -webkit-transform 0.3s;\n  transition: opacity 0.3s, transform 0.3s;\n  transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s; }\n  .errorMessage.active {\n    opacity: 1;\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0); }\n\n.errorCity {\n  position: absolute;\n  bottom: -25px;\n  -webkit-transition: opacity 0.3s;\n  transition: opacity 0.3s;\n  opacity: 0; }\n  .errorCity.active {\n    opacity: 1; }\n", ""]);
 
 	// exports
 
@@ -31865,7 +31882,7 @@
 
 
 	// module
-	exports.push([module.id, ".cityInfoWrapper {\n  margin: 40px 0;\n  width: 100%; }\n  .cityInfoWrapper .cityInfo {\n    float: left;\n    width: 31.5%;\n    background-color: rgba(255, 255, 255, 0.7);\n    margin-bottom: 2.73%;\n    padding: 15px 20px;\n    position: relative; }\n    .cityInfoWrapper .cityInfo:not(:nth-of-type(3n)) {\n      margin-right: 2.73%; }\n  .cityInfoWrapper .weatherUl li {\n    line-height: 2em;\n    font-size: 18px; }\n  .cityInfoWrapper .deleteIcon {\n    position: absolute;\n    right: 20px;\n    top: 20px; }\n    .cityInfoWrapper .deleteIcon:hover {\n      color: #8E8E8E; }\n\n@media screen and (max-width: 1200px) {\n  .cityInfoWrapper {\n    margin: 20px auto; }\n    .cityInfoWrapper .cityInfo {\n      width: 100%;\n      margin-right: none;\n      margin-bottom: 20px; }\n      .cityInfoWrapper .cityInfo:not(:nth-of-type(3n)) {\n        margin-right: none; } }\n", ""]);
+	exports.push([module.id, ".cityInfoWrapper {\n  margin: 40px 0;\n  width: 100%; }\n  .cityInfoWrapper .cityInfo {\n    float: left;\n    width: 31.5%;\n    background-color: rgba(255, 255, 255, 0.7);\n    margin-bottom: 2.73%;\n    padding: 15px 20px;\n    position: relative; }\n    .cityInfoWrapper .cityInfo:not(:nth-of-type(3n)) {\n      margin-right: 2.73%; }\n  .cityInfoWrapper .weatherUl li {\n    line-height: 2em;\n    font-size: 18px; }\n  .cityInfoWrapper .deleteIcon {\n    position: absolute;\n    right: 20px;\n    top: 20px; }\n    .cityInfoWrapper .deleteIcon:hover {\n      color: #8E8E8E; }\n\n@media screen and (max-width: 1200px) {\n  .cityInfoWrapper {\n    margin: 30px auto; }\n    .cityInfoWrapper .cityInfo {\n      width: 100%;\n      margin-right: none;\n      margin-bottom: 20px; }\n      .cityInfoWrapper .cityInfo:not(:nth-of-type(3n)) {\n        margin-right: none; } }\n", ""]);
 
 	// exports
 
@@ -31925,7 +31942,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n\nbody, html {\n  width: 100%;\n  font-family: \"Open Sans Condensed\", sans-serif, sans-serif; }\n\nh1 {\n  font-size: 34px; }\n\nh2 {\n  font-size: 26px;\n  margin: 0.2em 0 0.2em; }\n\nbody {\n  background-color: black;\n  background: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/mooning.png) repeat;\n  background-attachment: fixed;\n  font-size: 16px;\n  line-height: 1.41em; }\n\n.weatherAppWrapper {\n  max-width: 1200px;\n  margin: 40px auto 0 auto;\n  width: 100%;\n  height: 100%; }\n\ninput {\n  width: 100%;\n  border: none;\n  outline: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  -webkit-transition: background 0.3s;\n  transition: background 0.3s;\n  padding: 0px 20px;\n  color: black;\n  font-family: \"Open Sans Condensed\", sans-serif; }\n  input::-ms-clear {\n    display: none; }\n  input:focus {\n    background-color: white; }\n  input::-webkit-input-placeholder {\n    color: #8E8E8E; }\n  input::-moz-placeholder {\n    color: #8E8E8E; }\n  input:-ms-input-placeholder {\n    color: #8E8E8E; }\n  input:-moz-placeholder {\n    color: #8E8E8E; }\n\n.link {\n  color: #C7AC00;\n  text-decoration: underline;\n  cursor: pointer; }\n  .link:hover {\n    text-decoration: none; }\n\n.deleteIcon {\n  cursor: pointer; }\n  .deleteIcon:after {\n    content: '\\274C'; }\n\n.clear:after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.cbalink {\n  display: none !important; }\n\n@media screen and (max-width: 1200px) {\n  .weatherAppWrapper {\n    width: 80%;\n    margin: 20px auto 0 auto; } }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n\nbody, html {\n  width: 100%;\n  font-family: \"Open Sans Condensed\", sans-serif, sans-serif; }\n\nh1 {\n  font-size: 34px; }\n\nh2 {\n  font-size: 26px;\n  margin: 0.2em 0 0.2em; }\n\nbody {\n  background-color: black;\n  background: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/mooning.png) repeat;\n  background-attachment: fixed;\n  font-size: 16px;\n  line-height: 1.41em; }\n\n.weatherAppWrapper {\n  max-width: 1200px;\n  margin: 40px auto 0 auto;\n  width: 100%;\n  height: 100%; }\n\ninput {\n  width: 100%;\n  border: none;\n  outline: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  -webkit-transition: background 0.3s;\n  transition: background 0.3s;\n  padding: 0px 20px;\n  color: black;\n  font-family: \"Open Sans Condensed\", sans-serif; }\n  input::-ms-clear {\n    display: none; }\n  input:focus {\n    background-color: white; }\n  input::-webkit-input-placeholder {\n    color: #8E8E8E; }\n  input::-moz-placeholder {\n    color: #8E8E8E; }\n  input:-ms-input-placeholder {\n    color: #8E8E8E; }\n  input:-moz-placeholder {\n    color: #8E8E8E; }\n\n.link {\n  color: red;\n  text-decoration: underline;\n  cursor: pointer; }\n  .link:hover {\n    text-decoration: none; }\n\n.deleteIcon {\n  cursor: pointer; }\n  .deleteIcon:after {\n    content: '\\274C'; }\n\n.clear:after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.cbalink {\n  display: none !important; }\n\n@media screen and (max-width: 1200px) {\n  .weatherAppWrapper {\n    width: 80%;\n    margin: 20px auto 0 auto; } }\n", ""]);
 
 	// exports
 
