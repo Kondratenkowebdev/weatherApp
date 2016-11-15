@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import 'es6-promise/auto';
 import SearchForm from  './SearchForm/SearchForm.jsx';
 import CityInfo  from  './CityInfo/CityInfo.jsx';
+import Api  from  './api.js';
 
 export default class ContactList extends Component {
 	constructor(props, context) {
@@ -31,44 +32,53 @@ export default class ContactList extends Component {
 	}
 
 	getData = (city, writeCookie) => {
-		let apiKey = 'c5e94c788664f9506e9ede3a27d5660f';
-		fetch('http://api.openweathermap.org/data/2.5/weather?q='+city+'&APPID='+apiKey+'&units=metric').then(r => r.json())
-			.then(data => {
-				if ( data.cod == 502 ) {
-					this.setState(() => ({
-						errorText: 'This city does not exist'
-					}));
-					return
-				}
-				if (data.name.toLowerCase() !== city.toLowerCase()) {
-					this.setState(() => ({
-						errorText: 'An error in the name of the city',
-						showError: true,
-						validCity: data.name
-					}));
-					return
-				}
+		Api.getWeather(city).then(data => {
+			if (!data) {
 				this.setState(() => ({
-					citysJson: this.state.citysJson.concat([data])
+					errorText: 'Server error',
+					showError: true,
 				}));
-				if ( writeCookie ) {
-					this.addToLocalStorage( data.name.toLowerCase() );
-				}
-			})
-			.catch(e => {
+				return;
+			}
+
+			if ( data.cod == 502 ) {
 				this.setState(() => ({
-					errorText: 'Error getting data from the server',
-					showError: true
+					errorText: 'This city does not exist',
+					showError: true,
 				}));
-			});
+				return
+			}
+
+			if (data.name.toLowerCase() !== city.toLowerCase()) {
+				this.setState(() => ({
+					errorText: 'An error in the name of the city',
+					showError: true,
+					validCity: data.name
+				}));
+				return
+			}
+
+			this.setState(() => ({
+				citysJson: this.state.citysJson.concat([data])
+			}));
+
+			if ( writeCookie ) {
+				this.addToLocalStorage( data.name.toLowerCase() );
+			}
+		})
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
 		if ( this.state.citysNames.indexOf( this.state.searchValue.toLowerCase() ) == -1 ) {
 			this.getData( this.state.searchValue, true );
+		}else {
+			this.setState(() => ({
+				errorText: 'The city has already been added',
+				showError: true
+			}));
 		}
-		this.setState(() => ({ searchValue: '' }));
+		this.setState({ searchValue: '' });
 	}
 
 	deleteLocalStorage = (city) => {
@@ -97,7 +107,7 @@ export default class ContactList extends Component {
 		if ( localStorage.getItem("citysArr") ) {
 			if ( localStorage.getItem("citysArr").indexOf(city) == -1 ) {
 				let citysArr = localStorage.getItem("citysArr");
-				localStorage.setItem("citysArr", citysArr+','+city);
+				localStorage.setItem("citysArr", citysArr+','+city); 
 			}
 		}else {
 			localStorage.setItem("citysArr", city);
