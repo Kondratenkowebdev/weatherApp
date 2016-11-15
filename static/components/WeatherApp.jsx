@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import 'whatwg-fetch';
 import 'es6-promise/auto';
 import SearchForm from  './SearchForm/SearchForm.jsx';
-import CityInfo  from  './CityInfo/CityInfo.jsx';
+import CityInfo  from './CityInfo/CityInfo.jsx';
 import Api  from  './api.js';
 
 export default class ContactList extends Component {
@@ -33,6 +33,7 @@ export default class ContactList extends Component {
 
 	getData = (city, writeCookie) => {
 		Api.getWeather(city).then(data => {
+			console.log(data)
 			if (!data) {
 				this.setState(() => ({
 					errorText: 'Server error',
@@ -71,6 +72,9 @@ export default class ContactList extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		if ( this.state.citysNames.indexOf( this.state.searchValue.toLowerCase() ) == -1 ) {
+			this.setState(() => ({
+				citysNames: this.state.citysNames.concat([this.state.searchValue.toLowerCase()])
+			}));
 			this.getData( this.state.searchValue, true );
 		}else {
 			this.setState(() => ({
@@ -92,6 +96,11 @@ export default class ContactList extends Component {
 	}
 
 	deleteInfo = (name) => {
+		let citysArr = this.state.citysNames;
+		var index = citysArr.indexOf( name.toLowerCase() );
+		citysArr.splice( index, 1);
+		this.setState(() => ({ citysNames: citysArr }));
+
 		for (let i = 0; i < this.state.citysJson.length; i++) {
 			let updateArr = this.state.citysJson;
 			if ( this.state.citysJson[i].name == name) {
@@ -100,14 +109,14 @@ export default class ContactList extends Component {
 				this.deleteLocalStorage(name);
 				return
 			}
-		};
+		}
 	}
 
 	addToLocalStorage = (city) => {
 		if ( localStorage.getItem("citysArr") ) {
 			if ( localStorage.getItem("citysArr").indexOf(city) == -1 ) {
 				let citysArr = localStorage.getItem("citysArr");
-				localStorage.setItem("citysArr", citysArr+','+city); 
+				localStorage.setItem("citysArr", citysArr+','+city);
 			}
 		}else {
 			localStorage.setItem("citysArr", city);
@@ -124,7 +133,9 @@ export default class ContactList extends Component {
 
 	setValidCity = (city) => {
 		this.getData(this.state.validCity, true);
+
 		this.setState(() => ({ 
+			citysNames: this.state.citysNames.concat([this.state.validCity.toLowerCase()]),
 			searchValue: '',
 			showError: false,
 			validCity: ''

@@ -14,7 +14,7 @@ export default class extends Component {
 					<div className={ classNames( 'errorCity', {'active': this.props.validCity} ) } >
 						Did you mean 
 						<span className="link" onClick={ this.props.setValidCity }>
-							{ this.props.validCity}
+							 {this.props.validCity}
 						</span>
 						?
 					</div>

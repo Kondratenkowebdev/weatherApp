@@ -45,6 +45,9 @@ input
 	color: black 
 	font-family: $mainFont
 
+	&::-ms-clear
+		display: none
+
 	&:focus
 		background-color: rgba(255,255,255,1)
 
@@ -61,7 +64,7 @@ input
 		color: $placeholderColor
 
 .link
-	color: #C7AC00
+	color: red
 	text-decoration: underline
 	cursor: pointer
 
