@@ -1,6 +1,4 @@
 import React, { Component }  from 'react';
-import 'whatwg-fetch';
-import 'es6-promise/auto';
 import SearchForm from  './SearchForm/SearchForm.jsx';
 import CityInfo  from './CityInfo/CityInfo.jsx';
 import Api  from  './api.js';

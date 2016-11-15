@@ -9802,7 +9802,7 @@
 
 	var _WeatherApp2 = _interopRequireDefault(_WeatherApp);
 
-	__webpack_require__(484);
+	__webpack_require__(483);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31007,19 +31007,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(300);
-
-	__webpack_require__(473);
-
-	var _SearchForm = __webpack_require__(474);
+	var _SearchForm = __webpack_require__(473);
 
 	var _SearchForm2 = _interopRequireDefault(_SearchForm);
 
-	var _CityInfo = __webpack_require__(480);
+	var _CityInfo = __webpack_require__(479);
 
 	var _CityInfo2 = _interopRequireDefault(_CityInfo);
 
-	var _api = __webpack_require__(483);
+	var _api = __webpack_require__(482);
 
 	var _api2 = _interopRequireDefault(_api);
 
@@ -31265,16 +31261,6 @@
 /* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// This file can be required in Browserify and Node.js for automatic polyfill
-	// To use it:  require('es6-promise/auto');
-	'use strict';
-	module.exports = __webpack_require__(298).polyfill();
-
-
-/***/ },
-/* 474 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -31287,9 +31273,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(475);
+	__webpack_require__(474);
 
-	var _classnames = __webpack_require__(479);
+	var _classnames = __webpack_require__(478);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -31348,16 +31334,16 @@
 	;
 
 /***/ },
-/* 475 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(476);
+	var content = __webpack_require__(475);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(478)(content, {});
+	var update = __webpack_require__(477)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31374,10 +31360,10 @@
 	}
 
 /***/ },
-/* 476 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(477)();
+	exports = module.exports = __webpack_require__(476)();
 	// imports
 
 
@@ -31388,7 +31374,7 @@
 
 
 /***/ },
-/* 477 */
+/* 476 */
 /***/ function(module, exports) {
 
 	/*
@@ -31444,7 +31430,7 @@
 
 
 /***/ },
-/* 478 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -31696,7 +31682,7 @@
 
 
 /***/ },
-/* 479 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -31750,7 +31736,7 @@
 
 
 /***/ },
-/* 480 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31765,7 +31751,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(481);
+	__webpack_require__(480);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31858,16 +31844,16 @@
 	;
 
 /***/ },
-/* 481 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(482);
+	var content = __webpack_require__(481);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(478)(content, {});
+	var update = __webpack_require__(477)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31884,10 +31870,10 @@
 	}
 
 /***/ },
-/* 482 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(477)();
+	exports = module.exports = __webpack_require__(476)();
 	// imports
 
 
@@ -31898,7 +31884,7 @@
 
 
 /***/ },
-/* 483 */
+/* 482 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31918,16 +31904,16 @@
 	};
 
 /***/ },
-/* 484 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(485);
+	var content = __webpack_require__(484);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(478)(content, {});
+	var update = __webpack_require__(477)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31944,10 +31930,10 @@
 	}
 
 /***/ },
-/* 485 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(477)();
+	exports = module.exports = __webpack_require__(476)();
 	// imports
 
 
