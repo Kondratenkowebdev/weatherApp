@@ -31079,7 +31079,15 @@
 					});
 
 					if (writeCookie) {
-						_this.addToLocalStorage(data.name.toLowerCase());
+						(function () {
+							var citysNamesUpd = _this.state.citysNames.concat([data.name.toLowerCase()]);
+							_this.setState(function () {
+								return {
+									citysNames: citysNamesUpd
+								};
+							});
+							_this.addToLocalStorage(data.name.toLowerCase());
+						})();
 					}
 				});
 			};
@@ -31087,15 +31095,7 @@
 			_this.handleSubmit = function (e) {
 				e.preventDefault();
 				if (_this.state.citysNames.indexOf(_this.state.searchValue.trim().toLowerCase()) == -1) {
-					(function () {
-						var citysNamesUpd = _this.state.citysNames.concat([_this.state.searchValue.toLowerCase()]);
-						_this.setState(function () {
-							return {
-								citysNames: citysNamesUpd
-							};
-						});
-						_this.getData(_this.state.searchValue.trim(), true);
-					})();
+					_this.getData(_this.state.searchValue.trim(), true);
 				} else {
 					_this.setState(function () {
 						return {

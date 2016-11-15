@@ -63,6 +63,10 @@ export default class ContactList extends Component {
 			}));
 
 			if ( writeCookie ) {
+				let citysNamesUpd = this.state.citysNames.concat([data.name.toLowerCase()]);
+				this.setState(() => ({
+					citysNames: citysNamesUpd
+				}));
 				this.addToLocalStorage( data.name.toLowerCase() );
 			}
 		})
@@ -71,15 +75,11 @@ export default class ContactList extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		if ( this.state.citysNames.indexOf( this.state.searchValue.trim().toLowerCase() ) == -1 ) {
-			let citysNamesUpd = this.state.citysNames.concat([this.state.searchValue.toLowerCase()]);
-			this.setState(() => ({
-				citysNames: citysNamesUpd
-			}));
 			this.getData( this.state.searchValue.trim(), true );
 		}else {
 			this.setState(() => ({
 				errorText: 'The city has already been added',
-				showError: true
+				showError: true,
 			}));
 		}
 		this.setState({ searchValue: '' });
