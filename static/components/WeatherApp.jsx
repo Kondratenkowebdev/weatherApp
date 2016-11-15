@@ -70,12 +70,12 @@ export default class ContactList extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		if ( this.state.citysNames.indexOf( this.state.searchValue.toLowerCase() ) == -1 ) {
+		if ( this.state.citysNames.indexOf( this.state.searchValue.trim().toLowerCase() ) == -1 ) {
 			let citysNamesUpd = this.state.citysNames.concat([this.state.searchValue.toLowerCase()]);
 			this.setState(() => ({
 				citysNames: citysNamesUpd
 			}));
-			this.getData( this.state.searchValue, true );
+			this.getData( this.state.searchValue.trim(), true );
 		}else {
 			this.setState(() => ({
 				errorText: 'The city has already been added',
@@ -132,14 +132,23 @@ export default class ContactList extends Component {
 	}
 
 	setValidCity = (city) => {
-		this.getData(this.state.validCity, true);
+		if ( this.state.citysNames.indexOf( this.state.validCity.trim().toLowerCase() ) == -1 ) {
+			this.getData(this.state.validCity, true);
 
-		this.setState(() => ({ 
-			citysNames: this.state.citysNames.concat([this.state.validCity.toLowerCase()]),
-			searchValue: '',
-			showError: false,
-			validCity: ''
-		}));
+			this.setState(() => ({ 
+				citysNames: this.state.citysNames.concat([this.state.validCity.toLowerCase()]),
+				searchValue: '',
+				showError: false,
+				validCity: ''
+			}));
+		}
+		else {
+			this.setState(() => ({
+				errorText: 'The city has already been added',
+				showError: true,
+				validCity: ''
+			})); 
+		}
 	}
 
 	render() {

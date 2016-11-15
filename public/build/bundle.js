@@ -31086,7 +31086,7 @@
 
 			_this.handleSubmit = function (e) {
 				e.preventDefault();
-				if (_this.state.citysNames.indexOf(_this.state.searchValue.toLowerCase()) == -1) {
+				if (_this.state.citysNames.indexOf(_this.state.searchValue.trim().toLowerCase()) == -1) {
 					(function () {
 						var citysNamesUpd = _this.state.citysNames.concat([_this.state.searchValue.toLowerCase()]);
 						_this.setState(function () {
@@ -31094,7 +31094,7 @@
 								citysNames: citysNamesUpd
 							};
 						});
-						_this.getData(_this.state.searchValue, true);
+						_this.getData(_this.state.searchValue.trim(), true);
 					})();
 				} else {
 					_this.setState(function () {
@@ -31166,16 +31166,26 @@
 			};
 
 			_this.setValidCity = function (city) {
-				_this.getData(_this.state.validCity, true);
+				if (_this.state.citysNames.indexOf(_this.state.validCity.trim().toLowerCase()) == -1) {
+					_this.getData(_this.state.validCity, true);
 
-				_this.setState(function () {
-					return {
-						citysNames: _this.state.citysNames.concat([_this.state.validCity.toLowerCase()]),
-						searchValue: '',
-						showError: false,
-						validCity: ''
-					};
-				});
+					_this.setState(function () {
+						return {
+							citysNames: _this.state.citysNames.concat([_this.state.validCity.toLowerCase()]),
+							searchValue: '',
+							showError: false,
+							validCity: ''
+						};
+					});
+				} else {
+					_this.setState(function () {
+						return {
+							errorText: 'The city has already been added',
+							showError: true,
+							validCity: ''
+						};
+					});
+				}
 			};
 
 			_this.state = {
