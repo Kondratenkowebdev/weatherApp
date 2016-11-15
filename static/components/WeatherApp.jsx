@@ -33,7 +33,6 @@ export default class ContactList extends Component {
 
 	getData = (city, writeCookie) => {
 		Api.getWeather(city).then(data => {
-			console.log(data)
 			if (!data) {
 				this.setState(() => ({
 					errorText: 'Server error',
@@ -72,8 +71,9 @@ export default class ContactList extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		if ( this.state.citysNames.indexOf( this.state.searchValue.toLowerCase() ) == -1 ) {
+			let citysNamesUpd = this.state.citysNames.concat([this.state.searchValue.toLowerCase()]);
 			this.setState(() => ({
-				citysNames: this.state.citysNames.concat([this.state.searchValue.toLowerCase()])
+				citysNames: citysNamesUpd
 			}));
 			this.getData( this.state.searchValue, true );
 		}else {
@@ -87,7 +87,7 @@ export default class ContactList extends Component {
 
 	deleteLocalStorage = (city) => {
 		if (localStorage.getItem("citysArr") ) {
-			var citysArr = localStorage.getItem("citysArr").split(',');
+			let citysArr = localStorage.getItem("citysArr").split(',');
 			if (citysArr.indexOf( city.toLowerCase() ) !== -1) {
 				citysArr.splice( citysArr.indexOf( city.toLowerCase() ), 1);
 				localStorage.setItem("citysArr", citysArr.join());
@@ -97,7 +97,7 @@ export default class ContactList extends Component {
 
 	deleteInfo = (name) => {
 		let citysArr = this.state.citysNames;
-		var index = citysArr.indexOf( name.toLowerCase() );
+		let index = citysArr.indexOf( name.toLowerCase() );
 		citysArr.splice( index, 1);
 		this.setState(() => ({ citysNames: citysArr }));
 
